@@ -89,7 +89,7 @@ export default function Welcome() {
     }
 
     const getListStyle = isDraggingOver => {
-        return isDraggingOver ? "bg-amber-50" : "bg-slate-50"
+        return isDraggingOver ? "bg-orange-50 border-orange-200" : "bg-slate-50 border-gray-100"
     }
 
     const getItemStyle = isDragging => {
@@ -107,7 +107,7 @@ export default function Welcome() {
                                     <h1 className="text-lg text-black font-bold mb-4">{BoardTitles[ind]}</h1>
                                     <Droppable key={ind} droppableId={`${ind}`}>
                                         {(provided, snapshot) => (
-                                            <ul className={`${getListStyle(snapshot.isDraggingOver)} border border-gray-100 rounded-lg px-6 py-4 min-h-[40rem] transition-all`} {...provided.droppableProps} ref={provided.innerRef}>
+                                            <ul className={`border rounded-lg px-6 py-4 min-h-[40rem] transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
                                                 {board.map(({id, title, description}, index) => {
                                                     return (
                                                         <Draggable key={id} draggableId={id} index={index}>
