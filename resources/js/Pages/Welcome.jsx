@@ -3,43 +3,67 @@ import React, {useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 
 export default function Welcome() {
-    const BoardTitles = [
-        "Completed Tasks",
-        "New Tasks",
-        "On hold Tasks"
-    ]
     const TemplateBoard = [
-        [
-            {
-                id: "1",
-                title: "First Task",
-                description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
-            },
-            {
-                id: "2",
-                title: "Second Task",
-                description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
-            },
-            {
-                id: "3",
-                title: "Third Task",
-                description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
-            },
-        ],
-        [
-            {
-                id: "4",
-                title: "Fourth Task",
-                description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
-            },
-        ],
-        [
-            {
-                id: "5",
-                title: "Fifth Task",
-                description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
-            },
-        ],
+        {
+            title: "Completed Tasks",
+            tasks: [
+                {
+                    id: "1",
+                    title: "First Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "2",
+                    title: "Second Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "3",
+                    title: "Third Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                }
+            ],
+        },
+        {
+            title: "New Tasks",
+            tasks: [
+                {
+                    id: "4",
+                    title: "Fourth Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "5",
+                    title: "Fifth Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "6",
+                    title: "Sixth Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                }
+            ],
+        },
+        {
+            title: "On hold Tasks",
+            tasks: [
+                {
+                    id: "7",
+                    title: "Seventh Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "8",
+                    title: "Eighth Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                },
+                {
+                    id: "9",
+                    title: "Ninth Task",
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                }
+            ],
+        },
     ]
 
     const [Board, updateBoard] = useState(TemplateBoard)
@@ -74,22 +98,20 @@ export default function Welcome() {
         const dInd = +destination.droppableId;
 
         if (sInd === dInd) {
-            const items = reorder(Board[sInd], source.index, destination.index);
+            const items = reorder(Board[sInd].tasks, source.index, destination.index);
             const newState = [...Board];
-            newState[sInd] = items;
+            newState[sInd].tasks = items;
             updateBoard(newState);
         } else {
-            const result = move(Board[sInd], Board[dInd], source, destination);
+            const result = move(Board[sInd].tasks, Board[dInd].tasks, source, destination);
             const newState = [...Board];
-            newState[sInd] = result[sInd];
-            newState[dInd] = result[dInd];
-
-            updateBoard(newState.filter(group => group.length));
+            newState[sInd].tasks = result[sInd];
+            newState[dInd].tasks = result[dInd];
         }
     }
 
     const getListStyle = isDraggingOver => {
-        return isDraggingOver ? "bg-orange-50 border-orange-200" : "bg-slate-50 border-gray-100"
+        return isDraggingOver ? `bg-orange-50` : "bg-slate-50"
     }
 
     const getItemStyle = isDragging => {
@@ -99,30 +121,34 @@ export default function Welcome() {
     return (
         <>
             <Head title="Todos" />
-            <section className="flex items-start justify-center gap-6 bg-gray-50 pt-40 px-10 h-screen w-screen">
+            <section className="flex items-start justify-center gap-6 pt-40 px-10 h-[100%]">
                     <DragDropContext onDragEnd={handleTasks}>
                         {
                             Board.map((board, ind) => (
-                                <div className="w-1/5 min-h-[40rem] max-h-fit">
-                                    <h1 className="text-lg text-black font-bold mb-4">{BoardTitles[ind]}</h1>
-                                    <Droppable key={ind} droppableId={`${ind}`}>
+                                <div key={ind} className="w-1/5 min-h-[40rem] max-h-fit">
+                                    <Droppable  droppableId={`${ind}`}>
                                         {(provided, snapshot) => (
-                                            <ul className={`border rounded-lg px-6 py-4 min-h-[40rem] transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
-                                                {board.map(({id, title, description}, index) => {
-                                                    return (
-                                                        <Draggable key={id} draggableId={id} index={index}>
-                                                            {(provided, snapshot) => (
-                                                                <li className={`${getItemStyle(snapshot.isDragging)} relative bg-white rounded-sm px-6 py-4 my-2 border border-gray-200 transition-border-rd ${index === 0 ? "rounded-t-lg" : ""} ${index === board.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                                    <h2 className="text-lg font-bold text-black">{title}</h2>
-                                                                    <p className="text-slate-600">
-                                                                        { description }
-                                                                    </p>
-                                                                    <span className="absolute bottom-2 right-2 text-xs text-slate-600">id:{id}</span>
-                                                                </li>
-                                                            )}
-                                                        </Draggable>
-                                                    );
-                                                })}
+                                            <ul className={`rounded-lg px-6 py-4 min-h-[40rem] shadow-sm transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
+                                                <div>
+                                                    <h1 className={`inline-block text-lg text-black font-bold mb-4`}>{board.title}</h1>
+                                                </div>
+                                                {
+                                                    board.tasks.map(({id, title, description}, index) => {
+                                                        return (
+                                                            <Draggable key={id} draggableId={id} index={index}>
+                                                                {(provided, snapshot) => (
+                                                                    <li className={`${getItemStyle(snapshot.isDragging)} relative bg-white shadow px-6 py-4 my-2 transition-border-rd rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                        <h2 className="text-lg font-bold text-black">{title}</h2>
+                                                                        <p className="text-slate-600">
+                                                                            { description }
+                                                                        </p>
+                                                                        <span className="absolute bottom-2 right-2 text-xs text-slate-600">id:{id}</span>
+                                                                    </li>
+                                                                )}
+                                                            </Draggable>
+                                                        );
+                                                    })
+                                                }
                                                 {provided.placeholder}
                                             </ul>
                                         )}
