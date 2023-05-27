@@ -134,7 +134,8 @@ export default function Welcome() {
                                         {(provided, snapshot) => (
                                             <ul className={`rounded-lg px-6 py-4 min-h-[40rem] shadow-sm transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
                                                 <div>
-                                                    <h1 className={`inline-block text-lg text-gray-500 mb-4`}>{board.title}</h1>
+                                                    <h1 className={`inline-block text-lg text-gray-900 font-bold mb-4`}>{board.title}
+                                                        <span className="text-gray-500 font-normal ml-2">{board.tasks.length > 0 && `(${board.tasks.length})`}</span></h1>
                                                 </div>
                                                 {
                                                     board.tasks.map(({id, title, description}, index) => {
@@ -142,7 +143,7 @@ export default function Welcome() {
                                                             <Draggable key={id} draggableId={id} index={index}>
                                                                 {(provided, snapshot) => (
                                                                     <li className={`relative bg-white border ${getItemStyle(snapshot.isDragging)} hover:border-purple-500 shadow px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                                        <h2 className="text-lg font-bold text-black">{title}</h2>
+                                                                        <h2 className="text-lg font-bold text-gray-900">{title}</h2>
                                                                         <p className="text-sm text-slate-400">
                                                                             { description }
                                                                         </p>
