@@ -179,7 +179,7 @@ export default function Welcome() {
                                         {(provided, snapshot) => (<>
                                             <div>
                                                 <h1 className={`inline-block text-lg text-white font-bold mb-4`}>{board.title}
-                                                    <span className="font-normal ml-2">{board.tasks.length > 0 && ( board.tasks.length < 10 ? `(0${board.tasks.length})` : `(${board.tasks.length})`)}</span></h1>
+                                                    <span className="text-darkSlate-light text-base font-normal ml-1">{board.tasks.length > 0 && ( board.tasks.length < 10 ? `/0${board.tasks.length}` : `/${board.tasks.length}`)}</span></h1>
                                             </div>
                                             <ul className={`rounded-lg min-h-[40rem] transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
                                                 {
@@ -189,7 +189,7 @@ export default function Welcome() {
                                                                 {(provided, snapshot) => (
                                                                     <li className={`relative bg-darkSlate-400 border ${getItemStyle(snapshot.isDragging)} hover:border-darkSlate-50 px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                                                         <h2 className="text-lg font-bold text-white">{title}</h2>
-                                                                        <p className="text-sm text-zinc-400">
+                                                                        <p className="text-sm text-darkSlate-light">
                                                                             { description.substring(0, 60) }
                                                                         </p>
                                                                         <div className="relative mt-4">

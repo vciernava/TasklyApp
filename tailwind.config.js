@@ -17,6 +17,7 @@ export default {
             },
             colors: {
                 darkSlate: {
+                    light: "#5c6163",
                     50: "#404447",
                     100: "#3f4246",
                     200: "#32363c",
