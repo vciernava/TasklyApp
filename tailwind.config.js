@@ -13,7 +13,16 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Biryani', ...defaultTheme.fontFamily.sans],
+                sans: ['DM Sans', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                darkSlate: {
+                    50: "#404447",
+                    100: "#3f4246",
+                    200: "#32363c",
+                    400: "#2b2f33",
+                    500: "#212529",
+                },
             },
             transitionProperty: {
                 "border-rd": 'border-radius'

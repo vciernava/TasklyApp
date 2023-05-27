@@ -10,17 +10,32 @@ export default function Welcome() {
                 {
                     id: "1",
                     title: "First Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: [
+                        {
+                            id: "1",
+                            title: "Website",
+                            color: "rgb(62, 192, 224)"
+                        }
+                    ],
                 },
                 {
                     id: "2",
                     title: "Second Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: [
+                        {
+                            id: "2",
+                            title: "Android",
+                            color: "rgb(74, 192, 143)"
+                        }
+                    ],
                 },
                 {
                     id: "3",
                     title: "Third Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: []
                 }
             ],
         },
@@ -30,17 +45,26 @@ export default function Welcome() {
                 {
                     id: "4",
                     title: "Fourth Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: []
                 },
                 {
                     id: "5",
                     title: "Fifth Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: [
+                        {
+                            id: "2",
+                            title: "Android",
+                            color: "rgb(74, 192, 143)"
+                        }
+                    ],
                 },
                 {
                     id: "6",
                     title: "Sixth Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: []
                 }
             ],
         },
@@ -50,17 +74,32 @@ export default function Welcome() {
                 {
                     id: "7",
                     title: "Seventh Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: []
                 },
                 {
                     id: "8",
                     title: "Eighth Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: [
+                        {
+                            id: "1",
+                            title: "Website",
+                            color: "rgb(62, 192, 224)"
+                        }
+                    ],
                 },
                 {
                     id: "9",
                     title: "Ninth Task",
-                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc"
+                    description: "amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc",
+                    categories: [
+                        {
+                            id: "1",
+                            title: "Website",
+                            color: "rgb(62, 192, 224)"
+                        }
+                    ],
                 }
             ],
         },
@@ -111,12 +150,18 @@ export default function Welcome() {
     }
 
     const getListStyle = isDraggingOver => {
-        return isDraggingOver ? `bg-gray-50` : "bg-gray-50"
+        return isDraggingOver ? `bg-none` : "bg-none"
     }
 
     const getItemStyle = isDragging => {
-        return isDragging ? "border-purple-500" : "border-white"
+        return isDragging ? "border-darkSlate-50" : "border-darkSlate-400"
     }
+
+    const changeAlpha = (color, alpha) => {
+        const rgbValues = color.match(/\d+/g); // Extract the RGB values
+        const [r, g, b] = rgbValues;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
 
     return (
         <>
@@ -132,22 +177,30 @@ export default function Welcome() {
                                 <div key={ind} className="w-1/5 min-h-[40rem] max-h-fit">
                                     <Droppable  droppableId={`${ind}`}>
                                         {(provided, snapshot) => (
-                                            <ul className={`rounded-lg px-6 py-4 min-h-[40rem] shadow-sm transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
+                                            <ul className={`rounded-lg min-h-[40rem] transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
                                                 <div>
-                                                    <h1 className={`inline-block text-lg text-gray-900 font-bold mb-4`}>{board.title}
-                                                        <span className="text-gray-500 font-normal ml-2">{board.tasks.length > 0 && `(${board.tasks.length})`}</span></h1>
+                                                    <h1 className={`inline-block text-lg text-white font-bold mb-4`}>{board.title}
+                                                        <span className="font-normal ml-2">{board.tasks.length > 0 && ( board.tasks.length < 10 ? `(0${board.tasks.length})` : `(${board.tasks.length})`)}</span></h1>
                                                 </div>
                                                 {
-                                                    board.tasks.map(({id, title, description}, index) => {
+                                                    board.tasks.map(({id, title, description, categories}, index) => {
                                                         return (
                                                             <Draggable key={id} draggableId={id} index={index}>
                                                                 {(provided, snapshot) => (
-                                                                    <li className={`relative bg-white border ${getItemStyle(snapshot.isDragging)} hover:border-purple-500 shadow px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                                        <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-                                                                        <p className="text-sm text-slate-400">
-                                                                            { description }
+                                                                    <li className={`relative bg-darkSlate-400 border ${getItemStyle(snapshot.isDragging)} hover:border-darkSlate-50 px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                        <h2 className="text-lg font-bold text-white">{title}</h2>
+                                                                        <p className="text-sm text-zinc-400">
+                                                                            { description.substring(0, 60) }
                                                                         </p>
-                                                                        <span className="absolute bottom-2 right-2 text-xs text-slate-600">id:{id}</span>
+                                                                        <div className="relative mt-4">
+                                                                            {
+                                                                                categories.map((category) => (
+                                                                                    <div key={category.id} className={`text-xs font-bold uppercase px-4 py-2 w-max rounded align-middle text-center`} style={{color: category.color, backgroundColor: changeAlpha(category.color, 0.15)}}>
+                                                                                        {category.title}
+                                                                                    </div>
+                                                                                ))
+                                                                            }
+                                                                        </div>
                                                                     </li>
                                                                 )}
                                                             </Draggable>
