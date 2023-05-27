@@ -176,12 +176,12 @@ export default function Welcome() {
                             Board.map((board, ind) => (
                                 <div key={ind} className="w-1/5 min-h-[40rem] max-h-fit">
                                     <Droppable  droppableId={`${ind}`}>
-                                        {(provided, snapshot) => (
+                                        {(provided, snapshot) => (<>
+                                            <div>
+                                                <h1 className={`inline-block text-lg text-white font-bold mb-4`}>{board.title}
+                                                    <span className="font-normal ml-2">{board.tasks.length > 0 && ( board.tasks.length < 10 ? `(0${board.tasks.length})` : `(${board.tasks.length})`)}</span></h1>
+                                            </div>
                                             <ul className={`rounded-lg min-h-[40rem] transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
-                                                <div>
-                                                    <h1 className={`inline-block text-lg text-white font-bold mb-4`}>{board.title}
-                                                        <span className="font-normal ml-2">{board.tasks.length > 0 && ( board.tasks.length < 10 ? `(0${board.tasks.length})` : `(${board.tasks.length})`)}</span></h1>
-                                                </div>
                                                 {
                                                     board.tasks.map(({id, title, description, categories}, index) => {
                                                         return (
@@ -209,7 +209,7 @@ export default function Welcome() {
                                                 }
                                                 {provided.placeholder}
                                             </ul>
-                                        )}
+                                        </>)}
                                     </Droppable>
                                 </div>
                             ))
