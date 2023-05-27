@@ -111,11 +111,11 @@ export default function Welcome() {
     }
 
     const getListStyle = isDraggingOver => {
-        return isDraggingOver ? `bg-orange-50` : "bg-slate-50"
+        return isDraggingOver ? `bg-gray-50` : "bg-gray-50"
     }
 
     const getItemStyle = isDragging => {
-        return isDragging ? "opacity-80" : "opacity-100"
+        return isDragging ? "border-purple-500" : "border-white"
     }
 
     return (
@@ -134,14 +134,14 @@ export default function Welcome() {
                                         {(provided, snapshot) => (
                                             <ul className={`rounded-lg px-6 py-4 min-h-[40rem] shadow-sm transition-all ${getListStyle(snapshot.isDraggingOver)}`} {...provided.droppableProps} ref={provided.innerRef}>
                                                 <div>
-                                                    <h1 className={`inline-block text-lg text-black font-bold mb-4`}>{board.title}</h1>
+                                                    <h1 className={`inline-block text-lg text-gray-500 mb-4`}>{board.title}</h1>
                                                 </div>
                                                 {
                                                     board.tasks.map(({id, title, description}, index) => {
                                                         return (
                                                             <Draggable key={id} draggableId={id} index={index}>
                                                                 {(provided, snapshot) => (
-                                                                    <li className={`${getItemStyle(snapshot.isDragging)} relative bg-white hover:bg-slate-50 shadow px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                    <li className={`relative bg-white border ${getItemStyle(snapshot.isDragging)} hover:border-purple-500 shadow px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                                                         <h2 className="text-lg font-bold text-black">{title}</h2>
                                                                         <p className="text-sm text-slate-400">
                                                                             { description }
