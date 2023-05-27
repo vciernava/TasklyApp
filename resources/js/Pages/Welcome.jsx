@@ -121,7 +121,11 @@ export default function Welcome() {
     return (
         <>
             <Head title="Todos" />
-            <section className="flex items-start justify-center gap-6 pt-40 px-10 h-[100%]">
+            <div className="bg-red-200 text-red-600 font-bold p-4 text-center">
+                <p>This application is only for development purposes!</p>
+            </div>
+            <section className="flex items-start justify-center gap-6 pt-32 px-10 h-[100%]">
+
                     <DragDropContext onDragEnd={handleTasks}>
                         {
                             Board.map((board, ind) => (
