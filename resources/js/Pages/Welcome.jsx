@@ -27,7 +27,7 @@ export default function Welcome() {
                         {
                             id: "2",
                             title: "Android",
-                            color: "rgb(74, 192, 143)"
+                            color: "rgb(238,148,12)"
                         }
                     ],
                 },
@@ -56,7 +56,12 @@ export default function Welcome() {
                         {
                             id: "2",
                             title: "Android",
-                            color: "rgb(74, 192, 143)"
+                            color: "rgb(238,148,12)"
+                        },
+                        {
+                            id: "3",
+                            title: "iOS App",
+                            color: "rgb(74,192,76)"
                         }
                     ],
                 },
@@ -154,7 +159,7 @@ export default function Welcome() {
     }
 
     const getItemStyle = isDragging => {
-        return isDragging ? "border-darkSlate-50" : "border-darkSlate-400"
+        return isDragging ? "border-darkSlate-light" : "border-darkSlate-400"
     }
 
     const changeAlpha = (color, alpha) => {
@@ -187,12 +192,12 @@ export default function Welcome() {
                                                         return (
                                                             <Draggable key={id} draggableId={id} index={index}>
                                                                 {(provided, snapshot) => (
-                                                                    <li className={`relative bg-darkSlate-400 border ${getItemStyle(snapshot.isDragging)} hover:border-darkSlate-50 px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                    <li className={`relative bg-darkSlate-400 border ${getItemStyle(snapshot.isDragging)} hover:border-darkSlate-light px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                                                         <h2 className="text-lg font-bold text-white">{title}</h2>
                                                                         <p className="text-sm text-darkSlate-light">
                                                                             { description.substring(0, 60) }
                                                                         </p>
-                                                                        <div className="relative mt-4">
+                                                                        <div className="flex flex-wrap gap-2 relative mt-4">
                                                                             {
                                                                                 categories.map((category) => (
                                                                                     <div key={category.id} className={`text-xs font-bold uppercase px-4 py-2 w-max rounded align-middle text-center`} style={{color: category.color, backgroundColor: changeAlpha(category.color, 0.15)}}>
