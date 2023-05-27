@@ -141,9 +141,9 @@ export default function Welcome() {
                                                         return (
                                                             <Draggable key={id} draggableId={id} index={index}>
                                                                 {(provided, snapshot) => (
-                                                                    <li className={`${getItemStyle(snapshot.isDragging)} relative bg-white shadow px-6 py-4 my-2 transition-border-rd rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                    <li className={`${getItemStyle(snapshot.isDragging)} relative bg-white hover:bg-slate-50 shadow px-6 py-4 my-2 transition-border-rd transition-colors rounded-sm ${index === 0 ? "rounded-t-lg" : ""} ${index === board.tasks.length-1 ? "rounded-b-lg" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                                                         <h2 className="text-lg font-bold text-black">{title}</h2>
-                                                                        <p className="text-slate-600">
+                                                                        <p className="text-sm text-slate-400">
                                                                             { description }
                                                                         </p>
                                                                         <span className="absolute bottom-2 right-2 text-xs text-slate-600">id:{id}</span>
